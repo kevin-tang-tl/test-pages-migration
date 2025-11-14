@@ -1,0 +1,15 @@
+services:
+  # jekyll:
+  #   image: test
+  #   ports:
+  #   - "4000:4000"
+  #   volumes:
+  #   - ./:/usr/src/app
+
+  nginx:
+    image: nginx:latest
+    ports:
+    - "4001:80"
+    volumes:
+    - ./sites:/usr/share/nginx/html:ro
+    - ./config/nginx/conf.d:/etc/nginx/conf.d:ro
