@@ -1,0 +1,44 @@
+name: Publish MkDocs Site to GCS
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - docs/**
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install MkDocs and dependencies
+      run: pip install mkdocs mkdocs-material
+
+    - name: Build MkDocs site
+      run: mkdocs build
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        token_format: access_token
+        workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+        service_account: ${{ secrets.GCP_WIF_SERVICE_ACCOUNT }}
+
+    - name: Upload to GCS
+      uses: google-github-actions/upload-cloud-storage@v1
+      with:
+        path: site
+        destination: ${{ secrets.GCS_TARGET_BUCKET }}/sites/${{ github.repository }}

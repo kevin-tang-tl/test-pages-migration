@@ -1,0 +1,9 @@
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  syntax_highlighter: rouge
+  
+repository: perkinm3/website
+baseurl: /perkinm3/site-a
