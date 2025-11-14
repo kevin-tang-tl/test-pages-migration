@@ -42,3 +42,4 @@ jobs:
       with:
         path: site
         destination: ${{ secrets.GCS_TARGET_BUCKET }}/sites/${{ github.repository }}
+        parent: false
