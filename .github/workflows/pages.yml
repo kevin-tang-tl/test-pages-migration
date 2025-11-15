@@ -6,6 +6,7 @@ on:
       - develop
     paths:
       - docs/**
+  workflow_dispatch:   # Enables manual triggering
 
 jobs:
   build-and-deploy:
