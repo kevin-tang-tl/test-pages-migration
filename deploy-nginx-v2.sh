@@ -22,6 +22,6 @@ gcloud run deploy $SERVICE_NAME \
   --add-volume-mount=volume=nginx-conf,mount-path=/etc/nginx/conf.d \
   --add-volume=name=nginx-sites,type=cloud-storage,bucket=$BUCKET_NAME,mount-options="only-dir=sites" \
   --add-volume-mount=volume=nginx-sites,mount-path=/usr/share/nginx/html \
-  --allow-unauthenticated # or --no-allow-unauthenticated if you want to restrict access
+  --allow-unauthenticated
 
   echo "Deployment initiated. Check the Cloud Run console for status."
